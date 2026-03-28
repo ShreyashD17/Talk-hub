@@ -1,3 +1,4 @@
+console.log("App starting...");
 const path = require('path');
 const http = require('http');
 const express = require('express');
@@ -16,6 +17,11 @@ const io = socketio(server);
 
 // Set static folder
 app.use(express.static(path.join(__dirname, 'public')));
+
+//new
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public/index.html'));
+});
 
 const botName = 'ChatRoom Bot';
 
@@ -70,6 +76,8 @@ io.on('connection', socket => {
   });
 });
 
-const PORT = process.env.PORT || 3000;
+// const PORT = process.env.PORT || 3000;
+//new
+const PORT = process.env.PORT || 10000;
 
 server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
